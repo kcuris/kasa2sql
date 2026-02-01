@@ -31,16 +31,18 @@ public class Main {
                     continue;
                 }
 
-                String artikal = record.getString("ARTIKAL");
-                String sifra = record.getString("SIFRA");
+                byte[] artikalBytes = record.getBytes("ARTIKAL");
+                byte[] sifraBytes = record.getBytes("SIFRA");
                 BigDecimal cijena = record.getBigDecimal("CIJENA");
                 BigDecimal amba = record.getBigDecimal("AMBA");
 
-                if (artikal != null) {
-                    artikal = new String(artikal.getBytes(Charset.forName("ISO-8859-1")), Charset.forName("Windows-1250")).trim().replace("'", "''");
+                String artikal = "";
+                if (artikalBytes != null) {
+                    artikal = new String(artikalBytes, Charset.forName("Windows-1250")).trim().replace("'", "''");
                 }
-                if (sifra != null) {
-                    sifra = new String(sifra.getBytes(Charset.forName("ISO-8859-1")), Charset.forName("Windows-1250")).trim().replace("'", "''");
+                String sifra = "";
+                if (sifraBytes != null) {
+                    sifra = new String(sifraBytes, Charset.forName("Windows-1250")).trim().replace("'", "''");
                 }
 
                 String itemSql = String.format(
